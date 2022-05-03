@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
+    <style media="screen">
+        #container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #container>div {
+            height: 5em;
+            width: 5em;
+            background-color: rgb(0, 92, 128);
+        }
+    </style>
+    <title>React hands-on Learning</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <h1>React hands-on Learning</h1>
+    <div id="container"></div>
+    <script type="text/babel">
+        // const(p10)
+        // varキーワードで宣言された変数は再代入可能
+        var pizza = true;
+        pizza = false;
+        console.log(pizza);
+
+        // let レキシカルスコープ
+        var topic = "JavaScript";
+        if (topic) {
+            // let宣言しないと変数が上書きされてしまう
+            let topic = "React";
+            console.log(topic);
+        }
+        console.log(topic);
+
+        var div, container = document.getElementById('container');
+        for (let i = 0; i < 5; i++) {
+            // letかvarかで挙動が変わる
+            // ""ではなく''
+            div = document.createElement('div');
+            div.onclick = function () {
+                alert('This is box #' + i);
+            };
+            container.appendChild(div);
+        }
+
+        // template文字列
+        const lastName = "Ferrell";
+        const middleName = "William";
+        const firstName = "John";
+
+        // 加算演算子による文字列連結
+        console.log(lastName + ", " + firstName + " " + middleName);
+        // NG console.log('${lastName}, ${ firstName } ${ middleName }'); 
+        // OK
+        console.log(`${lastName}, ${firstName} ${middleName}`);
+        console.log(`${firstName}`);
+
+
+        // 関数式とhosting
+        // 関数宣言(function hey())は巻き上げられるが，関数式(const hey= function(){})はダメ
+        //hey1();
+        function hey1() {
+            alert("hey!");
+        };
+        const hey2 = function () {
+            alert("hey!!");
+        };
+        //hey2();
+
+        // オブジェクトリテラルの改善
+
+        var name = "Tallac";
+        var elevation = 9738;
+
+        var funHike = { name, elevation };
+
+        console.log(funHike); // {name: "Tallac", elevation: 9738}
+
+        var name = "Léo Taillefer";
+        var sound = "Kahh";
+        const skier = {
+            name, sound, powderYell() {
+                // 従来はfunctionであることを明記していた
+                let yell = this.sound.toUpperCase();
+                console.log(`${yell}!!!`);
+            }, speed(mph) {
+                this.speed = mph;
+                console.log('speed:', mph);
+            }
+        };
+        skier.powderYell();
+        skier.speed(350);
+        // JSONにできる
+        console.log(JSON.stringify(skier));
+
+        // 非同期処理
+        // これではAPIのレスポンス(Pending)が返却される
+        console.log(fetch("https://api.randomuser.me/?nat=US&results=10"));
+
+        // thenを使用してPromiseチェーンを構成する
+        console.log(fetch("https://api.randomuser.me/?nat=US&results=1")
+            .then(res => res.json())
+            .then(json => json.results)
+            .then(console.log)
+            .catch(console.error));
+
+        // async/awaitの使用例
+        // Promiseチェーンよりも簡潔に書ける
+        const getFakePerson = async () => {
+            try {
+                const res = await fetch("https://api.randomuser.me/?nat=US&results=1");
+                // これ以降のコードは，Promiseが成功するまで実行されない
+                const { results } = await res.json();
+                console.log(results);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        getFakePerson();
+    </script>
+</body>
+
+</html>
