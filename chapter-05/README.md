@@ -36,4 +36,34 @@ JSXを用いたReact実装を学ぶ.
         $ npm install react react-dom serve // react, react-domのインストール
         ```
       - 2:モジュール分割
-        - 今回は，recipe.jsを分離する
+        - chap04で作成したRecipeをモジュール分割し，webpackビルドする
+          以下のコマンドを打つ
+            ```Shell
+            $ npm install --save-dev- webpack webpack-cli
+            ```
+          依存関係のグラフなどが作成される
+          Babelをインストールする
+          以下のコマンドを打つ
+            ```Shell
+            $ npm install babel-loader @babel/core --save-dev
+            $ npm install @babel/preset-env @babel/preset-react --save-dev
+            ```
+          Babelの挙動を変更する．「.babelrc」を作成する
+          webpackを実行する!
+          ```Shell
+            $ npx webpack --mode development
+          ```
+          → 上手くいかなかった source-mapをコメントアウトしたが，ダメ
+
+  - 5.3.2 バンドルファイルのダウンロード 
+    - 結合済みファイル：bundle.js
+  - 5.3.3 ソースマップ
+    - 結合処理後のデバッグ用
+  
+  - 5.4 Create React App
+    - 構築自動化ツール 
+    ```Shell
+    $ npx create-react-app my-project
+    $ cd my-project
+    ```
+    TypeScriptで始めたい場合は，別途コマンドが存在する
