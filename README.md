@@ -9,6 +9,14 @@
 ## その他意向
 - JavaScriptの学習も兼ねたい
 - TypeScriptで実装したい
+- まとめQを作る
+
+## まとめQ
+- Reactプロジェクトの作成
+    ```Shell
+    $ npx create-react-app my-project
+    $ cd my-project
+    ```
 
 # 本の構成
 1. Reactの世界へようこそ
