@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
+    <title>Promise Chaining</title>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <h1>Promise Chaining</h1>
+    <p>Open the console</p>
+    <script type="text/babel">
+
+        // fetch API (method chaining)
+        // Chain
+        fetch(`https://api.github.com/users/moonhighway`)
+            .then(response => response.json())
+            .then(console.log)
+            .catch(console.error);
+
+        // async
+        async function requestGithubUser(githubLogin) {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/users/${githubLogin}`
+                );
+                const userData = await response.json();
+                console.log(userData);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        requestGithubUser("moonhighway");
+
+    </script>
+</body>
+
+</html>
